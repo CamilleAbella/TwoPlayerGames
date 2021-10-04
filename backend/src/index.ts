@@ -4,6 +4,8 @@ import * as sock from "socket.io"
 import * as path from "path"
 import * as uuid from "uuid"
 
+import "dotenv/config"
+
 const app = express()
 
 const server = http.createServer(app)
@@ -25,8 +27,8 @@ io.on("connection", (socket) => {
   })
 })
 
-server.listen(2888, () => {
-  console.log("listening on *:2888")
+server.listen(process.env.PORT, () => {
+  console.log("listening on *:" + process.env.PORT)
 })
 
 interface PlayerContext {
