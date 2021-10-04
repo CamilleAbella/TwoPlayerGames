@@ -27,6 +27,7 @@ const http = __importStar(require("http"));
 const sock = __importStar(require("socket.io"));
 const path = __importStar(require("path"));
 const uuid = __importStar(require("uuid"));
+require("dotenv/config");
 const app = (0, express_1.default)();
 const server = http.createServer(app);
 const io = new sock.Server(server);
@@ -41,7 +42,7 @@ io.on("connection", (socket) => {
         io.emit("buttonClick:ok", ctx);
     });
 });
-server.listen(3000, () => {
-    console.log("listening on *:3000");
+server.listen(process.env.PORT, () => {
+    console.log("listening on *:" + process.env.PORT);
 });
 //# sourceMappingURL=index.js.map
