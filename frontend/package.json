@@ -1,0 +1,11 @@
+{
+  "name": "two-player-games",
+  "version": "1.0.0",
+  "prettier": {
+    "semi": false
+  },
+  "devDependencies": {
+    "prettier": "^2.4.1",
+    "@types/socket.io-client": "^3.0.0"
+  }
+}
