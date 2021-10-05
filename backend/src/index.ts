@@ -4,6 +4,7 @@ import * as sock from "socket.io"
 import * as path from "path"
 
 import clicker from "./games/clicker/index"
+import fingerBall from "./games/finger-ball/index"
 
 import "dotenv/config"
 
@@ -16,7 +17,12 @@ const io = new sock.Server(server)
 app.use(express.static(path.join(__dirname, "..", "..", "frontend", "dist")))
 
 io.on("connection", (socket) => {
-  socket.on("newGame:clicker", (event) => clicker(io, socket, event))
+  socket.on("newGame:clicker", (clientSize) => {
+    clicker(io, socket, clientSize)
+  })
+  socket.on("newGame:finger-ball", (clientSize) => {
+    fingerBall(io, socket, clientSize)
+  })
 })
 
 server.listen(process.env.PORT, () => {

@@ -1,6 +1,7 @@
 import * as uuid from "uuid"
 import * as sock from "socket.io"
 import * as color from "color-engine"
+import * as calc from "../../calc"
 
 const game = "clicker"
 
@@ -10,7 +11,11 @@ interface ClickerPlayerContext {
   color: string
 }
 
-export default function (io: sock.Server, socket: sock.Socket, event: string) {
+export default function (
+  io: sock.Server,
+  socket: sock.Socket,
+  clientSize: calc.Vector
+) {
   const ctx: ClickerPlayerContext = {
     id: uuid.v4(),
     clicks: 0,
@@ -21,7 +26,7 @@ export default function (io: sock.Server, socket: sock.Socket, event: string) {
     if (event === "buttonClick") {
       ctx.clicks++
 
-      io.emit(game, "buttonClick", ctx)
+      io.emit(game, "refreshStats", ctx)
     }
   })
 }
